@@ -1,0 +1,24 @@
+# v1.9 交付物指纹
+# zip 与 .ko 本体不入仓库；按根 README「构建」「打包」两节生成后，产物应与下面一致。
+# 构建环境：WSL Ubuntu clang 18.1.3 + 真机导出的 6.6.118 kheaders（已实测可复现）
+
+# 二进制产物（不入库，仅记录指纹）
+# 21078d300aaf25d7df8483d0cfe411be6b8766540ed6f4671fbeec2d429458eb  piano_zram_v1.9.zip
+# f3b6c7c573cf47172dffb96cbee3150ae3bbab660aad9612155c1dcc843240bc  magisk/piano_zram/bin/zstd-upgrade.ko
+# 6b7ea2d53a4701cf38c8bf342054804c315f1c0cd11b9e977baddfc7b5314e45  magisk/piano_zram/bin/lz4-upgrade.ko
+
+# 以下为仓库内文件，可直接 sha256sum -c release/SHA256SUMS-v1.9.txt 校验
+08cb45a736d13cfada5f41afa5178425c13ffcac305e092774020a53e30983c8  magisk/piano_zram/bin/kernel-check.sh
+79f46fbd20fa0cf0268e9d4794eacba6ef8f5e02dad243e2a4df5d6eaad25258  magisk/piano_zram/bin/load.sh
+92981c43b16436b5bfa387b319ba6f335a060d76400ee2760fb180ba42c45464  magisk/piano_zram/bin/unload.sh
+6289f6346c8d8b782801fd03121eff859eb998048922bb76523a2406f913f226  magisk/piano_zram/bin/verify.sh
+a356c2ec32724cd897c6774064693052fe60b4cc1f4215fb40d9a8789850a72e  magisk/piano_zram/bin/zram-algo.sh
+3bc2d7816268fc4f2f6c1c7f88181b5edad24692f5357291100f17c316057545  magisk/piano_zram/bin/zstd-upgrade.sh
+d0923f81f67855359cc6c8ffeb52f9d58280953186776ff4908eaf74309bc23f  magisk/piano_zram/customize.sh
+610879a29d2d73cc81291a8686f7737459491ec0255bb9da04a46e4f745284f2  magisk/piano_zram/service.sh
+b2a936278733c138d151e704763bf719320318e0ac9788bb2c5edc5cc09bd76a  magisk/piano_zram/post-fs-data.sh
+aca2510d7d8004fdd1282cef26d27fc147437a14774f0e8de932f84525e3d1e7  magisk/piano_zram/uninstall.sh
+f9515fa5c8f105b50344ee519f8767e9ea0c526ccaaf764a924c906e4508eb30  magisk/piano_zram/module.prop
+058ea6311a2066caa5fadc43c56be7bc75a813c9041c7dfd4c15dff4712156e7  magisk/piano_zram/system_ext/etc/perfinit.conf
+7fcf02eb08b1ba83be846c5435cb92b358345d247e685c3d3b4fd727c345a15f *build/BUILD-6.6.118.sh
+d6dc6a2d1bbcdf7a93c08e9ff6d180b527e21717795a167d71b0f28ad8265d17 *build/pack.sh

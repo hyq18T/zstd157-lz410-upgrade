@@ -1,0 +1,8 @@
+# 模块脚本必须在 Android/toybox sh 下可执行：一律按 LF 入库与检出
+*.sh text eol=lf
+*.md text eol=lf
+module.prop text eol=lf
+*.conf text eol=lf
+*.txt text eol=lf
+*.ko binary
+*.zip binary

@@ -1,6 +1,0 @@
-id=zstd-upgrade
-name=zstd 1.5.7 + lz4 1.10.0 压缩算法升级模块
-version=v1.5.7-lz4.10.0
-versionCode=15710
-author=Codex
-description=向官方内核注册高优先级 zstd 1.5.7 与 lz4 1.10.0 crypto 驱动，遮蔽内置旧版；开机自动加载
