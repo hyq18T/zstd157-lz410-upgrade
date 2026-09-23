@@ -1,20 +1,19 @@
 # v1.9 交付物指纹
-# 2026-09-23：内核闸门改为只校验内核版本开头（如 6.6.118），构建号不同只告警。
+# 2026-09-23b：闸门只比内核版本开头；安装界面输出断行到 <=26 列（内核串分第二段）。
 # zip 与 .ko 本体不入仓库；按根 README「构建」「打包」两节生成后应与下面一致。
 
-# 二进制产物（不入库，仅记录指纹）
-275b262431f77928f4d9e661b515afb58e44321096803781c2d623396d1888ca  piano_zram_v1.9.zip
+# 二进制产物（不入库）：piano_zram_v1.9.zip 8abe00446535c912ce7cf3a0a9f15c4727bd330ec39edd308b534b8fe0dcf665
 f3b6c7c573cf47172dffb96cbee3150ae3bbab660aad9612155c1dcc843240bc  magisk/piano_zram/bin/zstd-upgrade.ko
 6b7ea2d53a4701cf38c8bf342054804c315f1c0cd11b9e977baddfc7b5314e45  magisk/piano_zram/bin/lz4-upgrade.ko
 
-# 仓库内文件（去掉注释行后可直接 sha256sum -c）
+# 仓库内文件
 50a0d7f1eee2c5afb926e53bfcbd19a6f2228f33a814f6998a6307c35b7529f6  magisk/piano_zram/bin/kernel-check.sh
 6289f6346c8d8b782801fd03121eff859eb998048922bb76523a2406f913f226  magisk/piano_zram/bin/verify.sh
 a356c2ec32724cd897c6774064693052fe60b4cc1f4215fb40d9a8789850a72e  magisk/piano_zram/bin/zram-algo.sh
 3bc2d7816268fc4f2f6c1c7f88181b5edad24692f5357291100f17c316057545  magisk/piano_zram/bin/zstd-upgrade.sh
 79f46fbd20fa0cf0268e9d4794eacba6ef8f5e02dad243e2a4df5d6eaad25258  magisk/piano_zram/bin/load.sh
 92981c43b16436b5bfa387b319ba6f335a060d76400ee2760fb180ba42c45464  magisk/piano_zram/bin/unload.sh
-495b99b472e72c1695bbf7307f164e1bebb26e429b26af4a85e10f099e00a986  magisk/piano_zram/customize.sh
+6ec7dcc8b92a70782632f029a6bf440e11d4a8975e3cff910c75d22f3a20ad0a  magisk/piano_zram/customize.sh
 833cd2fa833c474738dd048c8bd24997bdb26019d559a0f06fd71547db2e48ef  magisk/piano_zram/service.sh
 ff075b5459b4630c9b217fe7ab90f4ede6501763634a6408ee766f9edbb75a61  magisk/piano_zram/post-fs-data.sh
 aca2510d7d8004fdd1282cef26d27fc147437a14774f0e8de932f84525e3d1e7  magisk/piano_zram/uninstall.sh

@@ -103,6 +103,17 @@ pick_option() {
 	return 0
 }
 
+# 长字符串按 22 列断行打印：刷入界面不会自动换行，超宽就要左右滑
+ui_wrap() {
+	local s ind
+	s="$1"
+	ind="$2"
+	while [ -n "$s" ]; do
+		ui_print "${ind}$(printf '%s' "$s" | cut -c1-22)"
+		s=$(printf '%s' "$s" | cut -c23-999)
+	done
+}
+
 # ---------- 安装 ----------
 
 # 唯一限制：内核必须与包内 .ko 一致
@@ -129,7 +140,9 @@ kernel_gate() {
 		ui_print "====================="
 		gate_abort
 	fi
-	ui_print " 内核校验通过：$(uname -r)"
+	KRP=$(uname -r 2>/dev/null | cut -d'-' -f1)
+	ui_print " 内核校验通过 $KRP"
+	ui_wrap "$(uname -r)" "   "
 	return 0
 }
 
