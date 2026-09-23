@@ -3,8 +3,8 @@
 # zip 与 .ko 本体不入仓库；按根 README「构建」「打包」两节生成后应与下面一致。
 
 # 二进制产物（不入库）：piano_zram_v1.9.zip 8abe00446535c912ce7cf3a0a9f15c4727bd330ec39edd308b534b8fe0dcf665
-f3b6c7c573cf47172dffb96cbee3150ae3bbab660aad9612155c1dcc843240bc  magisk/piano_zram/bin/zstd-upgrade.ko
-6b7ea2d53a4701cf38c8bf342054804c315f1c0cd11b9e977baddfc7b5314e45  magisk/piano_zram/bin/lz4-upgrade.ko
+# f3b6c7c573cf47172dffb96cbee3150ae3bbab660aad9612155c1dcc843240bc  bin/zstd-upgrade.ko   （667160 B，二进制不入库，仅记录）
+# 6b7ea2d53a4701cf38c8bf342054804c315f1c0cd11b9e977baddfc7b5314e45  bin/lz4-upgrade.ko    （98288 B，二进制不入库，仅记录）
 
 # 仓库内文件
 50a0d7f1eee2c5afb926e53bfcbd19a6f2228f33a814f6998a6307c35b7529f6  magisk/piano_zram/bin/kernel-check.sh
