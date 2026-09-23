@@ -107,7 +107,7 @@ pick_option() {
 
 # 唯一限制：内核必须与包内 .ko 一致
 kernel_gate() {
-	local kmsg
+	local kmsg krc
 	KC_KO="$MODPATH/bin/zstd-upgrade.ko"
 	if [ ! -f "$MODPATH/bin/kernel-check.sh" ]; then
 		ui_print " × 包不完整"
@@ -116,17 +116,20 @@ kernel_gate() {
 		gate_abort
 	fi
 	. "$MODPATH/bin/kernel-check.sh"
-	if ! kmsg=$(kc_check 2>&1); then
-		ui_print ""
-		ui_print "====================="
-		ui_print " 安装中止：内核限制"
-		ui_print "====================="
+	kmsg=$(kc_check 2>&1)
+	krc=$?
+	if [ -n "$kmsg" ]; then
 		echo "$kmsg" | while IFS= read -r kl; do
 			[ -n "$kl" ] && ui_print " $kl"
 		done
+	fi
+	if [ "$krc" != 0 ]; then
+		ui_print "====================="
+		ui_print " 安装中止：内核限制"
+		ui_print "====================="
 		gate_abort
 	fi
-	ui_print " 内核校验通过"
+	ui_print " 内核校验通过：$(uname -r)"
 	return 0
 }
 

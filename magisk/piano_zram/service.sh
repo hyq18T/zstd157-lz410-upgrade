@@ -122,11 +122,13 @@ switch_zram() {
 KC_KO="$MODDIR/bin/zstd-upgrade.ko"
 if [ -f "$MODDIR/bin/kernel-check.sh" ]; then
 	. "$MODDIR/bin/kernel-check.sh"
-	if ! KMSG=$(kc_check 2>&1); then
-		log "== 本模块唯一的限制未通过（内核与本包 .ko 不一致），本次开机不做任何改动 =="
-		echo "$KMSG" | while IFS= read -r kl; do
-			[ -n "$kl" ] && log "$kl"
-		done
+	KMSG=$(kc_check 2>&1)
+	KRC=$?
+	[ -n "$KMSG" ] && echo "$KMSG" | while IFS= read -r kl; do
+		[ -n "$kl" ] && log "$kl"
+	done
+	if [ "$KRC" != 0 ]; then
+		log "== 本模块唯一的限制未通过（内核版本与本包 .ko 不一致），本次开机不做任何改动 =="
 		exit 0
 	fi
 	log "内核校验通过：$(uname -r)"
