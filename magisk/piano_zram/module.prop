@@ -1,6 +1,6 @@
 id=piano_zram
 name=MI Piano 系统调优 + 压缩算法升级
-version=v1.9
-versionCode=191
+version=v2.1
+versionCode=210
 author=Codex
-description=MI Piano 调优 + zstd 1.5.7 + lz4 1.10.0（可选保持系统默认算法）
+description=OS4.0.4.0.XOBCN + zstd 1.5.7 + lz4 1.10.0（可选保持系统默认算法）

@@ -18,7 +18,7 @@ set -eu
 SRC=${1:?需要源码目录}
 HDR=${2:?需要内核 headers 目录}
 OUT=${OUT:-$PWD/out}
-VERMAGIC=${VERMAGIC:-6.6.118-android15-8-gc44b714366cc-abogki519650608-4k SMP preempt mod_unload modversions aarch64}
+VERMAGIC=${VERMAGIC:-6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k SMP preempt mod_unload modversions aarch64}
 
 export QCOM_HEADERS_DIR="$HDR"
 export QCOM_VERMAGIC="$VERMAGIC"

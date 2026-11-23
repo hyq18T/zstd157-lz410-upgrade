@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 #
 # Build zstd-upgrade.ko for Xiaomi 15 Pro (haotian / 2410DPN6CC,
-# kernel 6.6.77-android15-8-gca30f3b4bef6-abogki440974771-4k).
+# kernel 6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k).
 #
 # The module embeds zstd 1.5.7 and registers it as cra_name "zstd" /
 # cra_driver_name "zstd-new-generic" with cra_priority 100. The kernel's

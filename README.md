@@ -1,7 +1,7 @@
 # zstd 1.5.7 + lz4 1.10.0 内核压缩算法升级模块
 
-面向小米 15 Pro（haotian / 2410DPN6CC，HyperOS `OS3.0.309.0.WOBCNXM`，内核
-`6.6.118-android15-8-gc44b714366cc-abogki519650608-4k`）构建的 Magisk 内核模块源码。
+面向小米 15 Pro（haotian / 2410DPN6CC，HyperOS `OS4.0.4.0.XOBCNXM`，内核
+`6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k`）构建的 Magisk 内核模块源码。
 模块向官方内核注册两个同名高优先级 crypto 压缩驱动，让新建的 zram 压缩上下文优先命中新版实现。
 
 | 算法 | 驱动名 | priority | 内嵌版本 |
@@ -10,7 +10,7 @@
 | lz4 | `lz4-new-generic` | 100 | 1.10.0 |
 
 本仓库只包含源码、模块脚本与构建工具，**不包含编译后的 `.ko` 与 Magisk 安装包**
-（`.ko` 只对特定内核有效，见 `release/SHA256SUMS-v1.9.txt` 记录的产物指纹）。
+（`.ko` 只对特定内核有效，见 `release/SHA256SUMS-v2.1.txt` 记录的产物指纹）。
 
 ## 原理
 
@@ -70,14 +70,16 @@ vermagic 或符号 CRC 不符时 `insmod` 必被拒（`-ENOEXEC`），装上等�
 ```text
 zstd-upgrade/            zstd 1.5.7 内核适配源码 + crypto 驱动 + 构建脚本
 lz4-upgrade/             lz4 1.10.0 源码 + crypto 驱动 + 构建脚本
-magisk/piano_zram/       v1.9 模块脚本（安装菜单/开机流程/内核闸门/验证）详见其 README.md
+magisk/piano_zram/       v2.1 模块脚本（安装菜单/开机流程/内核闸门/验证）
 build/
   BUILD-6.6.118.sh       两个 .ko 的构建封装（含换内核检查清单）
   pack.sh                打模块 zip（python3，写入 unix 权限位、条目确定性）
 release/
-  SHA256SUMS-v1.9.txt    v1.9 交付物的指纹（zip 与 .ko 本体不入库）
+  SHA256SUMS-v2.1.txt    v2.1 交付物的指纹（zip 与 .ko 本体不入库）
 docs/
-  v1.9-验证记录.md        真机证据、符号 CRC 核验、闸门与按键的测试记录
+  piano_zram-module-README.md
+                           模块安装、目录和使用说明
+  v2.1-适配记录.md        当前系统真机适配、CRC 核验和完整性验证记录
 tools/generate_zstd_linux.py
                            用上游 freestanding.py 把官方 zstd 生成内核版
 ```
@@ -93,7 +95,7 @@ sh build/BUILD-6.6.118.sh /path/to/本仓库 /path/to/kernel-headers
 ```
 
 产物落在 `$OUT/zstd/zstd-upgrade.ko` 与 `$OUT/lz4/lz4-upgrade.ko`。
-已实测该脚本可复现出与 v1.9 交付版逐字节一致的 `.ko`。
+已实测该脚本可复现出与 v2.1 交付版逐字节一致的 `.ko`。
 
 换内核时的检查清单（写在 `build/BUILD-6.6.118.sh` 注释里）：
 
@@ -112,7 +114,7 @@ sh build/BUILD-6.6.118.sh /path/to/本仓库 /path/to/kernel-headers
 打包成可安装 zip：
 
 ```sh
-sh build/pack.sh            # 生成 release/piano_zram_v1.9.zip
+sh build/pack.sh            # 生成 release/piano_zram_v2.1.zip
 ```
 
 zip 里文件位于根目录、无 `META-INF`，走 Magisk（管理器或 `magisk --install-module`）安装；
@@ -121,8 +123,8 @@ zip 里文件位于根目录、无 `META-INF`，走 Magisk（管理器或 `magis
 ## 安装与验证
 
 ```sh
-adb push piano_zram_v1.9.zip /data/local/tmp/
-adb shell su -c 'magisk --install-module /data/local/tmp/piano_zram_v1.9.zip'
+adb push piano_zram_v2.1.zip /data/local/tmp/
+adb shell su -c 'magisk --install-module /data/local/tmp/piano_zram_v2.1.zip'
 adb reboot
 adb shell su -c 'sh /data/adb/modules/piano_zram/bin/verify.sh'
 ```

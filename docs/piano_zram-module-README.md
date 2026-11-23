@@ -1,11 +1,11 @@
-# MI Piano 系统调优 + 压缩算法升级（v1.9，针对 6.6.118 新内核）
+# MI Piano 系统调优 + 压缩算法升级（v2.1，针对 OS4.0.4.0.XOBCN）
 
 机型：小米 15 Pro（`2410DPN6CC` / haotian）
-系统：`OS3.0.309.0.WOBCNXM`
-**目标内核：`6.6.118-android15-8-gc44b714366cc-abogki519650608-4k`（只认这个 vermagic，换内核需重编）**
+系统：`OS4.0.4.0.XOBCNXM`
+**目标内核：`6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k`（只认这个 vermagic，换内核需重编）**
 
-安装包：`release/piano_zram_v1.9.zip`
-构建与核验细节见 `验证记录-v1.9.txt`。
+安装包：`release/piano_zram_v2.1.zip`
+构建与核验细节见 `docs/v2.1-适配记录.md`。
 
 ## 唯一的限制：内核必须是本包编译时的那个
 
@@ -54,15 +54,15 @@ sha256。`verify.sh` 第 0 步用的是同一套写法。
    而本内核 `CONFIG_MODULE_FORCE_LOAD` 未开 —— 这种文件加载必被拒，所以“补加载”也要先比 vermagic
    再决定，不匹配就跳过并在 `service.log` 写清原因。
 5. **新增内核闸门**（见上一节）：`bin/kernel-check.sh`，安装/开机三处生效，不匹配就中止并解释。
-   `versionCode` 相应升到 191。
+   `versionCode` 相应升到 210。
 6. `verify.sh` 增加第 0 步：**直接比对 `.ko` 里的 vermagic 和 `uname -r`**，换内核后一眼能看出
    是不是包不匹配。
 
 ## 安装（走 Magisk，不走 recovery 直刷）
 
 ```sh
-adb push /d/piano_zram_v1.9.zip /data/local/tmp/
-adb shell su -c 'magisk --install-module /data/local/tmp/piano_zram_v1.9.zip'
+adb push /d/piano_zram_v2.1.zip /data/local/tmp/
+adb shell su -c 'magisk --install-module /data/local/tmp/piano_zram_v2.1.zip'
 adb reboot
 ```
 
@@ -194,15 +194,12 @@ echo default > /data/adb/modules/piano_zram/zram_algo && reboot
 ## 目录
 
 ```text
-piano-zram-combined-v1.9-20260922/
-├── README.md                     本文件
-├── 验证记录-v1.9.txt              真机只读探测 + CRC 核验 + 构建 + 按键测试记录
+piano-zram-v2.1/
+├── docs/piano_zram-module-README.md
+├── docs/v2.1-适配记录.md
 ├── build/
-│   ├── BUILD-6.6.118.sh          重编两个 .ko 的封装脚本（已实测可复现）
-│   ├── pack.sh                     打包脚本（python3，写 unix 权限位、条目确定序）
-│   └── 源码/                       你的 zstd157-lz410-upgrade 仓库副本（未改动）
-├── module/piano_zram/            模块内容（与 zip 内布局一致）
-└── release/
-    ├── piano_zram_v1.9.zip       安装包
-    └── SHA256SUMS.txt
+│   ├── BUILD-6.6.118.sh          重编两个 .ko 的封装脚本
+│   └── pack.sh                   打包脚本
+├── magisk/piano_zram/            模块内容（与 zip 内布局一致）
+└── release/piano_zram_v2.1.zip   通过 GitHub Release 分发
 ```

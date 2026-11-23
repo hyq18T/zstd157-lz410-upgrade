@@ -8,8 +8,8 @@
 
 set -e
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-MOD="$ROOT/module/piano_zram"
-OUT="${1:-$ROOT/release/piano_zram_v1.9.zip}"
+MOD="$ROOT/magisk/piano_zram"
+OUT="${1:-$ROOT/release/piano_zram_v2.1.zip}"
 
 python3 - "$MOD" "$OUT" <<'PY'
 import os, sys, zipfile
